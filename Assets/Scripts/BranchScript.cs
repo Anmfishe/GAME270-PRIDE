@@ -36,12 +36,13 @@ public class BranchScript : MonoBehaviour {
     {
         if (numBraches < 2 && !selecting)
         {
-            float randAngle = Random.Range(-45f, 45f);
-            GameObject cb = (GameObject)Instantiate(childbranch, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.AngleAxis(randAngle, Vector3.back));
-
-           
-            cb.transform.localScale = new Vector3(transform.localScale.x * .6f, transform.localScale.y * .6f, transform.localScale.z);
-            cb.transform.position = new Vector3(cb.transform.position.x - cb.transform.lossyScale.x / 2 * Mathf.Tan(randAngle), cb.transform.position.y + Mathf.Abs(cb.transform.lossyScale.y/2 * Mathf.Tan(randAngle)), transform.position.z);
+            float randAngle = Random.Range(Mathf.PI/2f, -Mathf.PI/2f);
+          
+            GameObject cb = (GameObject)Instantiate(childbranch, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.AngleAxis(randAngle * Mathf.Rad2Deg, Vector3.back));
+            //print(cb.transform.lossyScale.x + " " + cb.transform.lossyScale.y);
+            print(randAngle + " " + Mathf.Atan(randAngle));
+            cb.transform.localScale = new Vector3(transform.localScale.x * 0.7f, transform.localScale.y * 0.7f, transform.localScale.z);
+            cb.transform.position = new Vector3(cb.transform.position.x + cb.transform.lossyScale.y/2 *  Mathf.Atan(randAngle), cb.transform.position.y + cb.transform.lossyScale.y/2 * Mathf.Abs(Mathf.Cos(randAngle)), transform.position.z);
             //cb.transform.rotation = Quaternion.AngleAxis(randAngle, Vector3.forward);
             HingeJoint2D hj2d2 = cb.GetComponent<HingeJoint2D>();
             hj2d2.connectedBody = rb2d;
