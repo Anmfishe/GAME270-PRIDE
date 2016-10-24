@@ -5,6 +5,8 @@ public class BranchScript : MonoBehaviour {
     public GameObject childbranch;
     public GameObject leaves;
     public GameObject leaves2;
+	public GameObject apple;
+	public GameObject pear;
     private GameObject trunk;
     private GameObject cb;
     private int numBraches = 0;
@@ -37,7 +39,6 @@ public class BranchScript : MonoBehaviour {
             lvs3.transform.parent = transform.parent;
             HingeJoint2D lvhj2d3 = lvs3.GetComponent<HingeJoint2D>();
             lvhj2d3.connectedBody = rb2d;
-
         }
 	}
 	
@@ -75,8 +76,6 @@ public class BranchScript : MonoBehaviour {
                 
             }
           
-
-
             GameObject cb = (GameObject)Instantiate(childbranch, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.AngleAxis(randAngle * Mathf.Rad2Deg, Vector3.back));
             //print(cb.transform.rotation.z + " " + transform.rotation.z);
             cb.transform.localScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.6f, transform.localScale.z);
