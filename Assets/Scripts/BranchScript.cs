@@ -25,7 +25,6 @@ public class BranchScript : MonoBehaviour {
         HingeJoint2D lvhj2d = lvs.GetComponent<HingeJoint2D>();
         lvhj2d.connectedBody = rb2d;
         int numLeaves = (int)Random.Range(0f, 3f);
-        print(numLeaves);
         if(numLeaves == 1)
         {
             GameObject lvs2 = (GameObject)Instantiate(leaves2, transform.GetChild(1).transform.position, Quaternion.identity);
@@ -48,6 +47,7 @@ public class BranchScript : MonoBehaviour {
 	}
     void FixedUpdate ()
     {
+
         
         if(ryan > 10f)
         {
@@ -78,7 +78,8 @@ public class BranchScript : MonoBehaviour {
           
             GameObject cb = (GameObject)Instantiate(childbranch, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.AngleAxis(randAngle * Mathf.Rad2Deg, Vector3.back));
             //print(cb.transform.rotation.z + " " + transform.rotation.z);
-            cb.transform.localScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.6f, transform.localScale.z);
+            cb.transform.tag = transform.tag;
+            cb.transform.localScale = new Vector3(transform.localScale.x * 0.65f, transform.localScale.y * 0.65f, transform.localScale.z);
             cb.transform.position = new Vector3(cb.transform.position.x + cb.transform.lossyScale.y/2 *  Mathf.Atan(randAngle), cb.transform.position.y + cb.transform.lossyScale.y/2 * Mathf.Abs(Mathf.Cos(randAngle)), transform.position.z - transform.lossyScale.z);
             HingeJoint2D hj2d2 = cb.GetComponent<HingeJoint2D>();
             hj2d2.connectedBody = rb2d;
