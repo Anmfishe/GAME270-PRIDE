@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RainbowScript : MonoBehaviour {
-
+    bool first = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -21,11 +21,15 @@ public class RainbowScript : MonoBehaviour {
             if(tempColor.a == 255)
             {
                 count++;
+
             }
         }
-        if(count == 5)
+        if(count == 5&&!first)
         {
             Invoke("loadNextLevel", 2f);
+            AudioSource win = GetComponent<AudioSource>();
+            win.Play();
+            first = true;
         }
 	}
 }
