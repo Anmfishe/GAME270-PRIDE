@@ -4,34 +4,45 @@ using System.Collections;
 public class LeafScript : MonoBehaviour {
     RaycastHit[] hits;
     // Use this for initialization
-    void Start () {
-	
-	}
+    void Start()
+    {
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
-    void FixedUpdate()
-    {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 20;
-        hits = Physics.RaycastAll(transform.position, forward);
-        string hitss = "";
+        RaycastHit2D[] hits;
+        hits = Physics2D.RaycastAll(transform.position, transform.forward, 200f);
         for (int i = 0; i < hits.Length; i++)
         {
-            hitss += hits[i].transform.tag + " ";
-            //RaycastHit hit = hits[hits.Length - 1];
-            /*if (hit.transform.tag == "Sky")
+            RaycastHit2D hit = hits[i];
+            if (hit.transform.CompareTag("Sky"))
             {
                 break;
             }
-            else if (hit.transform.tag == "Rainbow")
+            if (hit.transform.CompareTag("Rainbow"))
             {
-                print("Test");
+                Renderer rend = hit.transform.GetComponent<Renderer>();
+
+                if (rend)
+                {
+                    // Change the material of all hit colliders
+                    // to use a transparent shader.
+                    Color tempColor = rend.material.color;
+                    tempColor.a = 255F;
+                    rend.material.color = tempColor;
+                }
                 break;
-            }*/
+            }
         }
-        print(hitss);
-        Debug.DrawRay(transform.position, forward, Color.green);
+
+    }
+    void OnMouseDown()
+    {
+        
+    }
+    void FixedUpdate()
+    {
+        
+    
     }
 }

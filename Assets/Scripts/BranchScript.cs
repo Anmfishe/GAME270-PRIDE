@@ -68,18 +68,18 @@ public class BranchScript : MonoBehaviour {
             if (transform.rotation.z > 0f)
             {
 
-                randAngle = Random.Range(Mathf.PI / 3f, 0);
+                randAngle = Random.Range(Mathf.PI / 3f, -Mathf.PI/4);
             }
             else
             {
-                randAngle = Random.Range(Mathf.PI / 6f, -Mathf.PI / 3f);
+                randAngle = Random.Range(Mathf.PI / 4f, -Mathf.PI / 3f);
                 
             }
           
             GameObject cb = (GameObject)Instantiate(childbranch, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.AngleAxis(randAngle * Mathf.Rad2Deg, Vector3.back));
             //print(cb.transform.rotation.z + " " + transform.rotation.z);
             cb.transform.tag = transform.tag;
-            cb.transform.localScale = new Vector3(transform.localScale.x * 0.65f, transform.localScale.y * 0.65f, transform.localScale.z);
+            cb.transform.localScale = new Vector3(transform.localScale.x * 0.75f, transform.localScale.y * 0.72f, transform.localScale.z);
             cb.transform.position = new Vector3(cb.transform.position.x + cb.transform.lossyScale.y/2 *  Mathf.Atan(randAngle), cb.transform.position.y + cb.transform.lossyScale.y/2 * Mathf.Abs(Mathf.Cos(randAngle)), transform.position.z - transform.lossyScale.z);
             HingeJoint2D hj2d2 = cb.GetComponent<HingeJoint2D>();
             hj2d2.connectedBody = rb2d;
