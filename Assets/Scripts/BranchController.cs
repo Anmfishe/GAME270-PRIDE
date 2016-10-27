@@ -7,14 +7,17 @@ public class BranchController : MonoBehaviour {
     public GameObject branchSprite;
     public int numBranches;
     private Transform meter;
+    private SpriteRenderer rend;
     private GameObject[] spots;
     private float rate = 0.05f;
 	// Use this for initialization
 	void Start () {
         meter = transform.GetChild(0);
-        meter.localScale -= new Vector3(meter.localScale.x, 0, 0);
-        
-	}
+        rend = meter.GetComponent<SpriteRenderer>();
+        Color temp = rend.color;
+        temp.a = 0;
+        rend.color = temp;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,30 +39,33 @@ public class BranchController : MonoBehaviour {
         }
         
 
-        rate = 0.02f;
+        rate = 0.005f;
         foreach(Transform child in cs.transform)
         {
-            rate -= 0.005f;
+            rate -= 0.001f;
         }
         foreach (Transform child in ws.transform)
         {
-            rate -= 0.005f;
+            rate -= 0.001f;
         }
-        meter.localScale += new Vector3(rate, 0, 0);
-        if(meter.localScale.x < 0)
+        rend = meter.GetComponent<SpriteRenderer>();
+        Color temp = rend.color;
+        temp.a += rate;
+        if (temp.a < 0)
         {
-            meter.localScale += new Vector3(-meter.localScale.x, 0, 0);
+            temp.a = 0;
         }
-        if(meter.localScale.x > 5)
+        if(temp.a > 1)
         {
             if (numBranches < 5)
             {
-                meter.localScale += new Vector3(-meter.localScale.x, 0, 0);
+                temp.a = 0;
                 numBranches++;
             }else
             {
-                meter.localScale -= new Vector3(meter.localScale.x - 5, 0, 0);
+                temp.a = 0;
             }
         }
+        rend.color = temp;
     }
 }
