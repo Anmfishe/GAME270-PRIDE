@@ -26,7 +26,7 @@ public class RainbowScript : MonoBehaviour {
         }
         if(count == 5&&!first)
         {
-            Invoke("loadNextLevel", 2f);
+            Invoke("loadNextLevel", 5f);
             AudioSource win = GetComponent<AudioSource>();
             win.Play();
             first = true;

@@ -5,8 +5,7 @@ public class BranchScript : MonoBehaviour {
     public GameObject childbranch;
     public GameObject leaves;
     public GameObject leaves2;
-	public GameObject apple;
-	public GameObject pear;
+    private GameObject branchController;
     private GameObject trunk;
     private GameObject cb;
     private int numBraches = 0;
@@ -17,6 +16,7 @@ public class BranchScript : MonoBehaviour {
     private bool selecting = false;
 	// Use this for initialization
 	void Start () {
+        
         rb2d = GetComponent<Rigidbody2D>();
         hj2d = GetComponent<HingeJoint2D>();
         trunk = GameObject.FindGameObjectWithTag("Trunk");
@@ -60,19 +60,22 @@ public class BranchScript : MonoBehaviour {
     }
     void OnMouseDown()
     {
-        if (numBraches < 3 && !selecting && transform.lossyScale.x > 0.07f)
+        branchController = GameObject.FindGameObjectWithTag("BranchController");
+        print(branchController.GetComponent<BranchController>().numBranches);
+        if (branchController.GetComponent<BranchController>().numBranches > 0 && numBraches < 3 && !selecting && transform.lossyScale.x > 0.07f)
         {
+            branchController.GetComponent<BranchController>().numBranches--;
             int randSide = (int)Random.Range(0, 2);
             float randAngle = 0;
 
             if (transform.rotation.z > 0f)
             {
 
-                randAngle = Random.Range(Mathf.PI / 3f, -Mathf.PI/4);
+                randAngle = Random.Range(Mathf.PI / 3f, -Mathf.PI/3);
             }
             else
             {
-                randAngle = Random.Range(Mathf.PI / 4f, -Mathf.PI / 3f);
+                randAngle = Random.Range(Mathf.PI / 3f, -Mathf.PI / 3f);
                 
             }
           
