@@ -24,12 +24,17 @@ public class RainbowScript : MonoBehaviour {
 
             }
         }
-        if(count == 5&&!first)
+        if(count == 5 &&!first)
         {
-            Invoke("loadNextLevel", 5f);
+            //Invoke("loadNextLevel", 5f);
             AudioSource win = GetComponent<AudioSource>();
             win.Play();
             first = true;
         }
-	}
+        if (Input.GetKeyDown("r"))
+        {
+            loadNextLevel();
+        }
+
+    }
 }
