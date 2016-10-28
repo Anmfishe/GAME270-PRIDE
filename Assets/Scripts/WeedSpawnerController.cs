@@ -11,8 +11,8 @@ public class WeedSpawnerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timer = 0;
-        minRange = 200;
-        maxRange = 400;
+        minRange = 100;
+        maxRange = 300;
         keeper = Random.Range(minRange, maxRange);
 	}
 	
@@ -33,7 +33,7 @@ public class WeedSpawnerController : MonoBehaviour {
             weed.transform.parent = transform;
             
         }
-        if (tree.GetComponent<TreeScript>().numBranches > 5)
+        if (tree.GetComponent<TreeScript>().numBranches > 4)
             timer++;
     }
 }
