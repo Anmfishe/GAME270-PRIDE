@@ -42,7 +42,7 @@ public class BranchController : MonoBehaviour {
         }
         
 
-        rate = 0.0015f;
+        rate = 0.0011f;
         foreach(Transform child in cs.transform)
         {
             rate -= 0.0005f;
