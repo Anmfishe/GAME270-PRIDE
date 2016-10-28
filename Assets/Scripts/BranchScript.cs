@@ -61,7 +61,7 @@ public class BranchScript : MonoBehaviour {
     void OnMouseDown()
     {
         branchController = GameObject.FindGameObjectWithTag("BranchController");
-        print(branchController.GetComponent<BranchController>().numBranches);
+        //print(branchController.GetComponent<BranchController>().numBranches);
         if (branchController.GetComponent<BranchController>().numBranches > 0 && numBraches < 3 && !selecting && transform.lossyScale.x > 0.07f)
         {
             branchController.GetComponent<BranchController>().numBranches--;

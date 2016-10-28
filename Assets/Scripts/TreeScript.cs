@@ -4,6 +4,7 @@ using System.Collections;
 public class TreeScript : MonoBehaviour {
     public GameObject rbranch;
     public GameObject lbranch;
+    public int numBranches;
     private HingeJoint2D hj2d;
     private AudioSource a;
 	// Use this for initialization
@@ -23,30 +24,33 @@ public class TreeScript : MonoBehaviour {
     {
         float rnum = 0;
         float lnum = 0;
+        numBranches = 0;
         foreach(Transform child in transform)
         {
             if(child.tag == "RightBranch")
             {
-                rnum += child.transform.lossyScale.x + child.transform.lossyScale.y;
+                numBranches++;
+                rnum += 1;
             }
             if (child.tag == "LeftBranch")
             {
-                lnum += child.transform.lossyScale.x + child.transform.lossyScale.y;
+                numBranches++;
+                lnum += 1;
             }
         }
-        if(rnum > lnum * 2.5)
+        if(rnum > lnum + 3)
         {
             hj2d = rbranch.GetComponent<HingeJoint2D>();
             hj2d.breakForce = 0f;
             a.Play();
-            Invoke("reload", 2.5f);
+            Invoke("reload", 2f);
         }
-        if (lnum > rnum * 2.5)
+        if (lnum > rnum + 3)
         {
             hj2d = lbranch.GetComponent<HingeJoint2D>();
             hj2d.breakForce = 0f;
             a.Play();
-            Invoke("reload", 2.5f);
+            Invoke("reload", 2f);
         }
     }
     

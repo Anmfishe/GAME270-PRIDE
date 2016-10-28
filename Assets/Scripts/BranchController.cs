@@ -10,13 +10,16 @@ public class BranchController : MonoBehaviour {
     private SpriteRenderer rend;
     private GameObject[] spots;
     private float rate = 0.05f;
+    private Vector3 origPos;
+    private bool expand = true;
 	// Use this for initialization
 	void Start () {
         meter = transform.GetChild(0);
-        rend = meter.GetComponent<SpriteRenderer>();
-        Color temp = rend.color;
-        temp.a = 0;
-        rend.color = temp;
+        origPos = meter.position;
+        //rend = meter.GetComponent<SpriteRenderer>();
+        //Color temp = rend.color;
+        //temp.a = 0;
+        //rend.color = temp;
     }
 	
 	// Update is called once per frame
@@ -39,19 +42,44 @@ public class BranchController : MonoBehaviour {
         }
         
 
-        rate = 0.005f;
+        rate = 0.0015f;
         foreach(Transform child in cs.transform)
         {
-            rate -= 0.001f;
+            rate -= 0.0005f;
         }
         foreach (Transform child in ws.transform)
         {
-            rate -= 0.001f;
+            rate -= 0.0005f;
         }
-        rend = meter.GetComponent<SpriteRenderer>();
-        Color temp = rend.color;
-        temp.a += rate;
-        if (temp.a < 0)
+        if(rate < 0) rate = 0;
+        meter.localScale += new Vector3(rate, 0, 0);
+        
+        if(meter.localScale.x < 0.2220003)
+            meter.position += new Vector3(rate * 9, 0, 0);
+        if (meter.localScale.x > 0.2220003)
+        {
+            if (numBranches < 5)
+            {
+                
+                meter.localScale += new Vector3(-meter.localScale.x, 0, 0);
+                meter.position = origPos;
+                numBranches++;
+                
+            }
+            else
+            {
+                
+                meter.localScale -= new Vector3(meter.localScale.x - 0.2220003f, 0, 0);
+                
+            }
+        }else if(meter.localScale.x < 0)
+        {
+            meter.localScale += new Vector3(-meter.localScale.x, 0, 0);
+        }
+        //rend = meter.GetComponent<SpriteRenderer>();
+        //Color temp = rend.color;
+        //temp.a += rate;
+        /*if (temp.a < 0)
         {
             temp.a = 0;
         }
@@ -63,9 +91,10 @@ public class BranchController : MonoBehaviour {
                 numBranches++;
             }else
             {
-                temp.a = 0;
+                temp.a = 1;
             }
         }
         rend.color = temp;
+        */
     }
 }

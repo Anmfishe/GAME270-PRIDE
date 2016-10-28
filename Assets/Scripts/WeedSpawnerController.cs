@@ -3,6 +3,7 @@ using System.Collections;
 
 public class WeedSpawnerController : MonoBehaviour {
     public GameObject Weed1;
+    public GameObject tree;
     private int timer;
     private int keeper;
     private int minRange;
@@ -10,8 +11,8 @@ public class WeedSpawnerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timer = 0;
-        minRange = 100;
-        maxRange = 300;
+        minRange = 200;
+        maxRange = 400;
         keeper = Random.Range(minRange, maxRange);
 	}
 	
@@ -32,6 +33,7 @@ public class WeedSpawnerController : MonoBehaviour {
             weed.transform.parent = transform;
             
         }
-        timer++;
+        if (tree.GetComponent<TreeScript>().numBranches > 5)
+            timer++;
     }
 }

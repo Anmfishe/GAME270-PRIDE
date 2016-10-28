@@ -4,6 +4,7 @@ using System.Collections;
 public class CloudSpawnerController : MonoBehaviour {
     public GameObject cloud1;
     public GameObject cloud2;
+    public GameObject tree;
     private int timer;
     private int minRange;
     private int maxRange;
@@ -11,8 +12,8 @@ public class CloudSpawnerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timer = 0;
-        minRange = 100;
-        maxRange = 300;
+        minRange = 200;
+        maxRange = 400;
         keeper = Random.Range(minRange, maxRange);
 
     }
@@ -47,6 +48,7 @@ public class CloudSpawnerController : MonoBehaviour {
                 
             }
         }
-        timer++;
+        if(tree.GetComponent<TreeScript>().numBranches > 3)
+            timer++;
     }
 }
